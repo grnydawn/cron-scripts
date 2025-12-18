@@ -9,6 +9,7 @@ echo "Starting omega cdash job"
 
 if [[ "$CRONJOB_MACHINE" == "chrysalis" ]]; then
     module load python cmake
+    PARMETIS_TPL=/lcrc/soft/climate/polaris/chrysalis/spack/dev_polaris_0_10_0_COMPILER_openmpi/var/spack/environments/dev_polaris_0_10_0_COMPILER_openmpi/.spack-env/view
 
 elif [[ "$CRONJOB_MACHINE" == "unknown" ]]; then
   echo "CRONJOB_MACHINE is not set."
@@ -28,7 +29,7 @@ for COMPILER in ${CRONJOB_COMPILERS}; do
     rm -rf ${WORKDIR}
     mkdir -p ${WORKDIR}
 
-    PARMETIS_HOME=/lcrc/soft/climate/polaris/chrysalis/spack/dev_polaris_0_10_0_${COMPILER}_openmpi/var/spack/environments/dev_polaris_0_10_0_${COMPILER}_openmpi/.spack-env/view
+    PARMETIS_HOME="${PARMETIS_TPL//COMPILER/$COMPILER}"
 
     cmake \
       -DOMEGA_CIME_MACHINE=${CRONJOB_MACHINE} \
