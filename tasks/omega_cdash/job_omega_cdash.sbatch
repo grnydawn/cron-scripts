@@ -26,9 +26,9 @@ else
 
 fi
 
-echo "Compilers: ${CRONJOB_COMPILERS}"
+echo "Compilers: ${E3SM_COMPILERS}"
 # Run Omega ctest
-for COMPILER in ${CRONJOB_COMPILERS}; do
+for COMPILER in ${E3SM_COMPILERS}; do
 
     WORKDIR=${TESTROOT}/${COMPILER}/${CRONJOB_DATE}
     rm -rf ${WORKDIR}

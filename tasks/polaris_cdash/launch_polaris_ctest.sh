@@ -176,7 +176,7 @@ run_baseline_suite() {
 install_miniforge3
 setup_polaris_repo
 
-for COMPILER in ${CRONJOB_COMPILERS}; do
+for COMPILER in ${E3SM_COMPILERS}; do
     echo "################################################################################"
     echo "Processing Baseline for COMPILER: $COMPILER"
     echo "################################################################################"
