@@ -1,7 +1,7 @@
 # CTestScript.txt to submit generated XMLs
 set(CTEST_PROJECT_NAME omega)
 set(CTEST_NIGHTLY_START_TIME "01:00:00 UTC")
-#set(CTEST_SITE "$ENV{HOSTNAME}")
+set(CTEST_SITE "$ENV{CRONJOB_MACHINE}")
 set(CTEST_BUILD_NAME "ExternalTest_Run")
 
 # Set source and binary directory to current (required for ctest_submit)

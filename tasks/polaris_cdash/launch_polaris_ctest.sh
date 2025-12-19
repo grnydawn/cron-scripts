@@ -17,6 +17,10 @@ if [[ "$CRONJOB_MACHINE" == "chrysalis" ]]; then
     module load python cmake
     PARMETIS_TPL=/lcrc/soft/climate/polaris/chrysalis/spack/dev_polaris_0_10_0_COMPILER_openmpi/var/spack/environments/dev_polaris_0_10_0_COMPILER_openmpi/.spack-env/view
 
+elif [[ "$CRONJOB_MACHINE" == "frontier" ]]; then
+    module load cray-python cmake git-lfs
+	PARMETIS_TPL="/ccs/proj/cli115/software/polaris/frontier/spack/dev_polaris_0_10_0_COMPILER_mpich/var/spack/environments/dev_polaris_0_10_0_COMPILER_mpich/.spack-env/view"
+
 elif [[ "$CRONJOB_MACHINE" == "unknown" ]]; then
   echo "CRONJOB_MACHINE is not set."
   exit -1
@@ -188,6 +192,11 @@ for COMPILER in ${CRONJOB_COMPILERS}; do
         configure_polaris "$COMPILER"
 
         PARMETIS_HOME="${PARMETIS_TPL//COMPILER/$COMPILER}"
+		if [ ! -f "$PARMETIS_HOME" ]; then
+			if [[ "$CRONJOB_MACHINE" == "frontier" ]]; then
+				PARMETIS_HOME=/ccs/proj/cli115/software/polaris/frontier/spack/dev_polaris_0_10_0_craygnu-mphipcc_mpich/var/spack/environments/dev_polaris_0_10_0_craygnu-mphipcc_mpich/.spack-env/view
+            fi
+		fi
 
         build_omega_dev "$COMPILER" "$DEVELOP_BUILD" "$PARMETIS_HOME"
         
@@ -221,7 +230,7 @@ for COMPILER in ${CRONJOB_COMPILERS}; do
     if [ -f "${HERE}/CTestScript.txt" ]; then
          cp "${HERE}/CTestScript.txt" "$CDASH_DIR/"
          pushd "$CDASH_DIR" > /dev/null
-         module load cmake && CTEST_SITE=$CRONJOB_MACHINE ctest -S CTestScript.txt -V
+         module load cmake && ctest -S CTestScript.txt -V
          popd > /dev/null
     else
          echo "Warning: CTestScript.txt not found in ${HERE}"
