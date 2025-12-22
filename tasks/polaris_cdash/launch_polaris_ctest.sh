@@ -219,7 +219,7 @@ for COMPILER in ${E3SM_COMPILERS}; do
            --log-dir "$CASE_OUTPUTS_DIR" \
            --output-dir "$CDASH_DIR" \
            --results-dir "$DEVELOP_BUILD/Testing" \
-           --site-name "$MACHINE" \
+           --site-name "$CRONJOB_MACHINE" \
            --build-name "Baseline_${COMPILER}" \
            --build-id "$BUILD_ID"
     else
