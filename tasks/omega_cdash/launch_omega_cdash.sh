@@ -39,6 +39,6 @@ sbatch \
   --job-name=OmegaCdash \
   --output="$CRONJOB_LOGDIR/omega_cdash_%j.out" \
   --error="$CRONJOB_LOGDIR/omega_cdash_%j.err" \
-  ${HERE}/job_omega_cdash.sbatch
+  ${HERE}/job_${CRONJOB_MACHINE}_omega_cdash.sbatch
 
 echo "[$(date)] Finished $SCRIPT_NAME"
