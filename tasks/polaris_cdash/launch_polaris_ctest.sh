@@ -25,6 +25,10 @@ elif [[ "$CRONJOB_MACHINE" == "pm-gpu" ]]; then
     module load cray-python cmake
     PARMETIS_TPL="/global/cfs/cdirs/e3sm/software/polaris/pm-gpu/spack/dev_polaris_0_10_0_COMPILER_mpich/var/spack/environments/dev_polaris_0_10_0_COMPILER_mpich/.spack-env/view"
 
+elif [[ "$CRONJOB_MACHINE" == "pm-cpu" ]]; then
+    module load cray-python cmake
+    PARMETIS_TPL="/global/cfs/cdirs/e3sm/software/polaris/pm-cpu/spack/dev_polaris_0_10_0_COMPILER_mpich/var/spack/environments/dev_polaris_0_10_0_COMPILER_mpich/.spack-env/view"
+
 elif [[ "$CRONJOB_MACHINE" == "unknown" ]]; then
   echo "CRONJOB_MACHINE is not set."
   exit -1

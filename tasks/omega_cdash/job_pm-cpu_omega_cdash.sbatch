@@ -1,12 +1,11 @@
 #!/bin/bash -l
 #SBATCH  --job-name=OmegaSCron
 #SBATCH  --nodes=1
-#SBATCH  --ntasks-per-node=8
-#SBATCH  --gpus-per-node=4
-#SBATCH  --output=/global/cfs/cdirs/e3sm/omega/cronjobs_pm-gpu/logs/OmegaSCronGPU_%j.out
-#SBATCH  --error=/global/cfs/cdirs/e3sm/omega/cronjobs_pm-gpu/logs/OmegaSCronGPU_%j.err
-#SBATCH  --constraint=gpu
-#SBATCH  --account=e3sm_g 
+#SBATCH  --ntasks-per-node=64
+#SBATCH  --output=/global/cfs/cdirs/e3sm/omega/cronjbos_pm-cpu/logs/OmegaSCronCPU_%j.out
+#SBATCH  --error=/global/cfs/cdirs/e3sm/omega/cronjobs_pm-cpu/logs/OmegaSCronCPU_%j.err
+#SBATCH  --constraint=cpu
+#SBATCH  --account=e3sm
 #SBATCH  --qos regular
 #SBATCH  --exclusive
 #SBATCH  --time 01:00:00
@@ -24,6 +23,10 @@ elif [[ "$CRONJOB_MACHINE" == "frontier" ]]; then
 elif [[ "$CRONJOB_MACHINE" == "pm-gpu" ]]; then
     module load cray-python cmake
 	PARMETIS_TPL="/global/cfs/cdirs/e3sm/software/polaris/pm-gpu/spack/dev_polaris_0_10_0_COMPILER_mpich/var/spack/environments/dev_polaris_0_10_0_COMPILER_mpich/.spack-env/view"
+
+elif [[ "$CRONJOB_MACHINE" == "pm-cpu" ]]; then
+    module load cray-python cmake
+	PARMETIS_TPL="/global/cfs/cdirs/e3sm/software/polaris/pm-cpu/spack/dev_polaris_0_10_0_COMPILER_mpich/var/spack/environments/dev_polaris_0_10_0_COMPILER_mpich/.spack-env/view"
 
 elif [[ "$CRONJOB_MACHINE" == "unknown" ]]; then
   echo "CRONJOB_MACHINE is not set."
