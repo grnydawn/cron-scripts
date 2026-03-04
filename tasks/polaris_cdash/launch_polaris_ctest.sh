@@ -160,7 +160,7 @@ run_baseline_suite() {
     fi
 
     # Set up baseline suite
-    polaris suite -c ocean -t omega_pr --model omega \
+    polaris suite -c ocean -t omega_nightly --model omega \
         -w "$polaris_build" \
         -p "$omega_build"
 
