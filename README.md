@@ -1,10 +1,10 @@
-# E3SM Cron Scripts
+# OMEGA Cron Scripts
 
-Automated cron job scripts for continuous testing and CDash reporting of E3SM climate modeling projects across multiple HPC systems.
+Automated cron job scripts for continuous testing and CDash reporting of OMEGA ocean modeling projects across multiple HPC systems.
 
 ## Overview
 
-This repository orchestrates the compilation, testing, and result submission to [CDash](https://my.cdash.org) for two major E3SM ocean model components:
+This repository orchestrates the compilation, testing, and result submission to [CDash](https://my.cdash.org) for two major OMEGA ocean model components:
 
 - **Omega** - Next-generation ocean model
 - **Polaris** - MPAS-Ocean model with Omega integration
