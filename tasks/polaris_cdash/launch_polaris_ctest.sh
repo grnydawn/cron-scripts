@@ -76,7 +76,16 @@ setup_polaris_repo() {
     
     echo "Updating specific submodules (jigsaw-python, Omega)..."
     git submodule update --init --recursive jigsaw-python
-    git submodule update --init --recursive e3sm_submodules/Omega
+    git submodule update --init e3sm_submodules/Omega
+	pushd e3sm_submodules/Omega
+    git submodule update --init --recursive \
+		externals/YAKL \
+		externals/ekat \
+		externals/scorpio \
+		externals/cpptrace \
+		components/omega/external  \
+		cime
+   popd
 }
 
 configure_polaris() {
@@ -94,7 +103,6 @@ configure_polaris() {
 
     if ! ls load_polaris_${CRONJOB_MACHINE}_${compiler}_*.sh >/dev/null 2>&1; then
         echo "Configuring Polaris Environment"
-        #./deploy.py --deploy-spack \
         ./deploy.py \
 					--machine "${CRONJOB_MACHINE}" \
 					--compiler "${compiler}"
