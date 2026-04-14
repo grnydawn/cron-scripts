@@ -88,16 +88,11 @@ configure_polaris() {
     
     cd "${POLARIS_CDASH_BASEDIR}/polaris"
 
-    if [ ! -f "configure_polaris_envs.py" ]; then
-        echo "Error: configure_polaris_envs.py not found in $(pwd)"
-        exit 1
+    if [ ! -f "load_polaris_${CRONJOB_MACHINE}_${compiler}_*.sh" ]; then
+	    ./deploy.py --machine ${CRONJOB_MACHINE} --compiler ${compiler}
     fi
 
-    if ! ls load_dev_polaris_*_${CRONJOB_MACHINE}_${compiler}_*.sh >/dev/null 2>&1; then
-        echo "Configuring Polaris Environment"
-        ./configure_polaris_envs.py --conda "${MINIFORGE3_HOME}" \
-            -c "${compiler}" -m "${CRONJOB_MACHINE}"
-    fi
+    source ./load_polaris_${CRONJOB_MACHINE}_${compiler}_*.sh
 }
 
 build_omega_dev() {
@@ -151,7 +146,7 @@ run_baseline_suite() {
     
     cd ""
 
-    local env_file=$(ls ${POLARIS_CDASH_BASEDIR}/polaris/load_dev_polaris_*_${CRONJOB_MACHINE}_${compiler}_*.sh | head -n 1)
+    local env_file=$(ls ${POLARIS_CDASH_BASEDIR}/polaris/load_polaris_${CRONJOB_MACHINE}_${compiler}_*.sh | head -n 1)
     if [ -f "$env_file" ]; then
         echo "Sourcing $env_file"
         source "$env_file"
