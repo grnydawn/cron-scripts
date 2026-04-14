@@ -21,7 +21,8 @@ cd ${OMEGA_HOME}
 git checkout develop
 git fetch origin
 git reset --hard origin/develop
-git submodule update --init --recursive || true
+git submodule update --init --recursive externals/ekat externals/scorpio cime components/omega/external
+
 
 if [[ ! -f ${TESTROOT}/OmegaMesh.nc ]]; then
     wget -O ${TESTROOT}/OmegaMesh.nc https://web.lcrc.anl.gov/public/e3sm/inputdata/ocn/mpas-o/oQU240/ocean.QU.240km.151209.nc
